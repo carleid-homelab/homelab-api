@@ -114,12 +114,12 @@ func main() {
 	})
 
 	http.HandleFunc("/api/metrics/memory", func(w http.ResponseWriter, r *http.Request) {
-		data, err := queryGrafana(`100 * (1 - node_memory_MemAvailable_bytes * on(instance) group_left(nodename) node_uname_info{nodename="vps.carleid.dev"} / node_memory_MemTotal_bytes * on(instance) group_left(nodename) node_uname_info{nodename="vps.carleid.dev"})`)
+		data, err := queryGrafana(`100 * (1 - node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)`)
 		jsonResponse(w, data, err)
 	})
 
 	http.HandleFunc("/api/metrics/cpu", func(w http.ResponseWriter, r *http.Request) {
-		data, err := queryGrafana(`100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * on(instance) group_left(nodename) node_uname_info{nodename="vps.carleid.dev"} * 100)`)
+		data, err := queryGrafana(`100 - (avg(rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)`)
 		jsonResponse(w, data, err)
 	})
 
