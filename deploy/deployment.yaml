@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: ghcr.io/carleid-homelab/homelab-api:latest
+          image: ghcr.io/carleid-homelab/homelab-api:498eb98fd1e27abf2130777f6ec54b9a205e9bce
           ports:
             - containerPort: 8080
           env:
